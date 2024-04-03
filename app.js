@@ -5,8 +5,9 @@ const port = process.env.PORT || 3000;
 // Serve static files from the 'public' directory
 app.use(express.static("public"));
 
+// Serve 'basicindex.html' when the root URL is accessed
 app.get("/", (req, res) => {
-  res.send("Hello, QA! This is the Node.js project running.");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
 app.listen(port, () => {

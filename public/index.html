@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Asset Links Display</title>
+  </head>
+  <body>
+    <h1>Asset Links</h1>
+    <pre id="assetLinks"></pre>
+
+    <script>
+      fetch("/.well-known/assetlinks.json")
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("assetLinks").textContent = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        })
+        .catch((error) => {
+          document.getElementById("assetLinks").textContent =
+            "Error loading asset links: " + error;
+        });
+    </script>
+  </body>
+</html>
