@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "au.com.adaptalift",
+      "sha1_cert_fingerprints": ["fe76485c831c0b0855f71545af8d3fe68307a6ce"]
+    }
+  }
+]
