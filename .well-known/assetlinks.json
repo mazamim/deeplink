@@ -4,7 +4,9 @@
     "target": {
       "namespace": "android_app",
       "package_name": "au.com.adaptalift",
-      "sha1_cert_fingerprints": ["fe76485c831c0b0855f71545af8d3fe68307a6ce"]
+      "sha1_cert_fingerprints": [
+        "fe:76:48:5c:83:1c:0b:08:55:f7:15:45:af:8d:3f:e6:83:07:a6:ce"
+      ]
     }
   }
 ]
