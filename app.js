@@ -40,16 +40,17 @@ app.get("/details", (req, res) => {
   const htmlContent = `
     <html>
       <head>
-        <meta http-equiv="refresh" content="3;url=${fallbackUrl}">
-      </head>
-      <body>
         <script type="text/javascript">
-          window.onload = function() {
-            // Try to open the deep link
+          function attemptDeepLink() {
             window.location.href = '${deepLink}';
+            setTimeout(function() {
+              window.location.href = '${fallbackUrl}';
+            }, 3000); // Adjust the delay as needed
           }
         </script>
-        <p>If you are not redirected automatically, follow the <a href="${fallbackUrl}">link</a>.</p>
+      </head>
+      <body onload="attemptDeepLink()">
+        <p>If you are not redirected, <a href="${fallbackUrl}">click here</a>.</p>
       </body>
     </html>
   `;
