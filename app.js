@@ -11,7 +11,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/details", (req, res) => {
-  res.redirect("https://www.adaptalift.com.au/");
+  res.redirect(
+    "https://www.adaptalift.com.au/new-equipment/h1-50-3-5xt-series-standard-forklifts"
+  );
 });
 
 app.listen(port, () => {
