@@ -32,9 +32,9 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-// Serve a special page that attempts to open the deep link
+// Intermediate endpoint to handle deep linking
 app.get("/details", (req, res) => {
-  const deepLink = `com.example.deeplink_cookbook://details?id=${req.query.id}`;
+  const deepLink = `intent://details?id=${req.query.id}#Intent;scheme=com.example.deeplink_cookbook;package=com.example.deeplink_cookbook;end`;
   const fallbackUrl =
     "https://www.adaptalift.com.au/new-equipment/h1-50-3-5xt-series-standard-forklifts";
   const htmlContent = `
@@ -46,10 +46,10 @@ app.get("/details", (req, res) => {
         <script type="text/javascript">
           window.onload = function() {
             // Try to open the deep link
-            window.location = '${deepLink}';
+            window.location.href = '${deepLink}';
           }
         </script>
-        If you are not redirected automatically, follow the <a href="${fallbackUrl}">link</a>.
+        <p>If you are not redirected automatically, follow the <a href="${fallbackUrl}">link</a>.</p>
       </body>
     </html>
   `;
