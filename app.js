@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
+// Intermediate endpoint to handle deep linking
 app.get("/details", (req, res) => {
   const deepLink = `com.example.deeplink_cookbook://details?id=${req.query.id}`;
   const fallbackUrl =
@@ -39,28 +40,19 @@ app.get("/details", (req, res) => {
   const htmlContent = `
     <html>
       <head>
-        <title>Redirecting...</title>
-      </head>
-      <body>
         <script type="text/javascript">
-          function redirectToDeepLink() {
-            var isAppOpened = false;
-            window.location = '${deepLink}';
+          function handleDeepLink() {
+            // Attempt to open the deep link
+            window.location.href = '${deepLink}';
+            // After a short delay, check if the user is still on the page
             setTimeout(function() {
-              if (!isAppOpened) {
-                window.location.href = '${fallbackUrl}';
-              }
-            }, 1000); // 1000 milliseconds = 1 second
+              // If the user is still here, redirect to the fallback URL
+              window.location.href = '${fallbackUrl}';
+            }, 3000); // Delay in milliseconds
           }
-
-          window.onload = redirectToDeepLink;
-
-          document.addEventListener("visibilitychange", function() {
-            if (document.visibilityState === 'hidden') {
-              isAppOpened = true;
-            }
-          });
         </script>
+      </head>
+      <body onload="handleDeepLink()">
         <p>If you are not redirected, <a href="${fallbackUrl}">click here</a>.</p>
       </body>
     </html>
