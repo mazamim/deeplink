@@ -32,24 +32,35 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-// Intermediate endpoint to handle deep linking
 app.get("/details", (req, res) => {
-  const deepLink = `intent://details?id=${req.query.id}#Intent;scheme=com.example.deeplink_cookbook;package=com.example.deeplink_cookbook;end`;
+  const deepLink = `com.example.deeplink_cookbook://details?id=${req.query.id}`;
   const fallbackUrl =
     "https://www.adaptalift.com.au/new-equipment/h1-50-3-5xt-series-standard-forklifts";
   const htmlContent = `
     <html>
       <head>
-        <script type="text/javascript">
-          function attemptDeepLink() {
-            window.location.href = '${deepLink}';
-            setTimeout(function() {
-              window.location.href = '${fallbackUrl}';
-            }, 3000); // Adjust the delay as needed
-          }
-        </script>
+        <title>Redirecting...</title>
       </head>
-      <body onload="attemptDeepLink()">
+      <body>
+        <script type="text/javascript">
+          function redirectToDeepLink() {
+            var isAppOpened = false;
+            window.location = '${deepLink}';
+            setTimeout(function() {
+              if (!isAppOpened) {
+                window.location.href = '${fallbackUrl}';
+              }
+            }, 1000); // 1000 milliseconds = 1 second
+          }
+
+          window.onload = redirectToDeepLink;
+
+          document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === 'hidden') {
+              isAppOpened = true;
+            }
+          });
+        </script>
         <p>If you are not redirected, <a href="${fallbackUrl}">click here</a>.</p>
       </body>
     </html>
