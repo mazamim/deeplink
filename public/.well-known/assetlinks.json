@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.example.deeplink_cookbook",
+      "package_name": "au.com.adaptalift",
       "sha256_cert_fingerprints": [
-        "41:33:70:75:0A:0F:93:FA:A9:4A:55:DB:21:C6:12:43:EE:AE:13:C9:E2:20:98:1A:1A:1B:50:3D:A0:CE:49:1C"
+        "7F:9D:9E:9F:D5:65:3C:BC:D2:39:D5:71:30:E9:58:AA:01:B9:44:CE:DE:E8:48:C5:0A:9E:F9:47:A2:0C:DE:E7"
       ]
     }
   }
